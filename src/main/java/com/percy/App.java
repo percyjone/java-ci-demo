@@ -5,6 +5,6 @@ package com.percy;
  */
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Welcome to GitHub Actions CI/CD");
     }
 }

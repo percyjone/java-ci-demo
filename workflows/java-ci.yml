@@ -1,0 +1,45 @@
+name: hello world
+on: 
+  push:
+
+jobs:
+  Hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 
+
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
+
+      - name: setup maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.11
+      
+      - name: compile project
+        run: mvn compile
+
+      - name: run tests
+        run: mvn test
+
+      - name: build project
+        run: mvn clean install
+
+      - name: run the project
+        run: mvn exec:java "-Dexec.mainClass=com.percy.App"
+
+      - name: Create JAR File
+        run: mvn package
+
+      - name: run the JAR file
+        run: java -cp target/java-ci-demo-1.0-SNAPSHOT.jar com.percy.App
+
+      - name: clean project
+        run: mvn clean
+
+
